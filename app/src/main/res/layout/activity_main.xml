@@ -13,11 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/crear"
-        android:text="Crear"
+        android:text="@string/crear"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/ver"
         android:layout_margin="30dp"
+        android:textSize="@dimen/_25sp"
         />
     <Button
         android:layout_width="match_parent"
@@ -26,8 +27,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:text="Ver"
+        android:text="@string/ver"
         android:layout_margin="30dp"
+        android:textSize="@dimen/_25sp"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

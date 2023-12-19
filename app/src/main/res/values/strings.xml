@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Crud</string>
+    <string name="crear">Crear</string>
+    <string name="ver">Ver</string>
 </resources>
