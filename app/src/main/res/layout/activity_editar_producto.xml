@@ -4,6 +4,102 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditarProducto">
+    tools:context=".EditarProducto"
+    android:background="@color/green">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:id="@+id/card"
+        app:cardCornerRadius="80dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/lnombre"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/img"
+            android:src="@drawable/fotodef"
+            android:scaleType="centerCrop"
+            />
+
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lnombre"
+        app:layout_constraintTop_toBottomOf="@+id/card"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/ldescripcion"
+        android:gravity="center"
+        android:layout_marginHorizontal="30dp"
+        app:errorEnabled="true"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/nombre"
+            android:hint="Nombre"
+            android:gravity="center"
+            android:inputType="textPersonName"
+            android:background="@color/white"
+            />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ldescripcion"
+        app:layout_constraintTop_toBottomOf="@+id/lnombre"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/calidad"
+        android:layout_marginHorizontal="30dp"
+        app:errorEnabled="true"
+        android:hint="Descripcion"
+        app:startIconDrawable="@drawable/descripcion"
+        >
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:id="@+id/descripcion"
+            android:inputType="textMultiLine"
+            android:maxLength="150"
+            android:maxHeight="110dp"
+            android:background="@color/white"
+            />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <RatingBar
+        android:id="@+id/calidad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/enviar"
+        tools:ignore="SpeakableTextPresentCheck"
+        app:layout_constraintTop_toBottomOf="@id/ldescripcion"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/calidad"
+        android:text="Enviar"
+        android:id="@+id/enviar"
+        android:layout_marginHorizontal="20dp"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
