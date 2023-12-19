@@ -1,8 +1,12 @@
 package com.example.crud
 
+import android.app.AlertDialog
+import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.crud.databinding.ActivityCrearBinding
@@ -11,36 +15,48 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlin.coroutines.CoroutineContext
 
-class Crear : AppCompatActivity() {
+class Crear : AppCompatActivity(), CoroutineScope {
     private lateinit var bind: ActivityCrearBinding
 
     private lateinit var db: DatabaseReference
     private lateinit var st: StorageReference
     private var urlimg: Uri? = null
     private lateinit var listaproductos: MutableList<Producto>
+
+    private lateinit var job: Job
     override fun onCreate(savedInstanceState: Bundle?) {
         bind = ActivityCrearBinding.inflate(layoutInflater)
         db = FirebaseDatabase.getInstance().reference
         st = FirebaseStorage.getInstance().reference
+        listaproductos = Utilidades.obtenerListaClubs()
+
+        job = Job()
 
         super.onCreate(savedInstanceState)
         setContentView(bind.root)
 
         bind.enviar.setOnClickListener {
             if (validar()) {
-
-                var urlimgfirebase = null
-//                var urlimgfirebase = guardarEscudo(urlimg!!)
                 var nombre = bind.nombre.text.toString()
                 var descripcion = bind.descripcion.text.toString()
                 var calidad = bind.calidad.rating.toDouble()
-                var nuevoproducto = Producto(nombre, descripcion, calidad, urlimgfirebase)
+                launch {
 
-                Utilidades.crearProducto(nuevoproducto)
+                    Log.d("x", nombre)
+                    Log.d("y", urlimg.toString())
+                    var urlimgfirebase = Utilidades.guardarEscudo(nombre, urlimg!!)
+
+                    var nuevoproducto = Producto(nombre, descripcion, calidad, urlimgfirebase)
+
+                    Utilidades.crearProducto(nuevoproducto)
+
+                }
 
                 limpiar()
 
@@ -50,9 +66,29 @@ class Crear : AppCompatActivity() {
         }
 
         bind.img.setOnClickListener {
-            accesoGaleria.launch("image/*")
+            showImagePickerDialog()
+
         }
+
+
     }
+
+
+    private fun showImagePickerDialog() {
+        val items = arrayOf("Cámara", "Galería")
+
+        AlertDialog.Builder(this)
+            .setTitle("Elegir una fuente de imagen")
+            .setItems(items) { _, posicion ->
+                when (posicion) {
+                    0 -> "print"
+                    1 -> accesoGaleria.launch("image/*")
+
+                }
+            }
+            .show()
+    }
+
 
     private val accesoGaleria = registerForActivityResult(ActivityResultContracts.GetContent())
     { uri: Uri? ->
@@ -72,8 +108,11 @@ class Crear : AppCompatActivity() {
     }
 
     private fun validar(): Boolean {
+        listaproductos = Utilidades.obtenerListaClubs()
         var bnombre = false
         var bdescripcion = false
+        var bexiste = false
+        var bimagen = false
 
         if (!bind.nombre.text.isNullOrBlank()) {
             bnombre = true
@@ -93,9 +132,30 @@ class Crear : AppCompatActivity() {
             bind.calidad.rating = 0.5F
         }
 
+        if (Utilidades.existeClub(listaproductos, bind.nombre.text.toString().trim())) {
+            Toast.makeText(applicationContext, "Ese Club ya existe", Toast.LENGTH_SHORT)
+                .show()
+        }else{
+            bexiste = true
+        }
 
-        return bnombre && bdescripcion
+        if (urlimg != null){
+            bimagen = true
+        }else{
+            Toast.makeText(applicationContext, "Debes insertar una imagen", Toast.LENGTH_SHORT)
+                .show()
+        }
+
+
+        return bnombre && bdescripcion && bexiste && bimagen
 
     }
+
+    override fun onDestroy() {
+        job.cancel()
+        super.onDestroy()
+    }
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.IO + job
 
 }

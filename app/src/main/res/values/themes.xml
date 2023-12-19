@@ -2,8 +2,9 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Crud" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/black2</item>
     </style>
-
     <style name="Theme.Crud" parent="Base.Theme.Crud" />
+
+    <color name="black2">#DD000000</color>
 </resources>

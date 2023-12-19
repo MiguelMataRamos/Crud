@@ -8,7 +8,12 @@
     android:background="@drawable/fondoinicio"
     >
 
-
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    android:src="@drawable/logo"
+    />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,6 +24,7 @@
         app:layout_constraintBottom_toTopOf="@+id/ver"
         android:layout_margin="30dp"
         android:textSize="@dimen/_25sp"
+        android:backgroundTint="@color/boton"
         />
     <Button
         android:layout_width="match_parent"
@@ -30,6 +36,8 @@
         android:text="@string/ver"
         android:layout_margin="30dp"
         android:textSize="@dimen/_25sp"
+        android:backgroundTint="@color/boton"
+
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
