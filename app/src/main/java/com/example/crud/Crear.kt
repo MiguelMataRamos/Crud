@@ -33,16 +33,16 @@ class Crear : AppCompatActivity() {
         bind.enviar.setOnClickListener {
             if (validar()) {
 
-                var urlimg = guardarEscudo(urlimg!!)
+                var urlimgfirebase = null
+//                var urlimgfirebase = guardarEscudo(urlimg!!)
                 var nombre = bind.nombre.text.toString()
                 var descripcion = bind.descripcion.text.toString()
                 var calidad = bind.calidad.rating.toDouble()
-                var nuevoproducto = Producto(nombre, descripcion, calidad, urlimg)
+                var nuevoproducto = Producto(nombre, descripcion, calidad, urlimgfirebase)
 
-                crearProducto(nuevoproducto)
+                Utilidades.crearProducto(nuevoproducto)
 
                 limpiar()
-
 
                 Toast.makeText(this, "Producto guardado con exito", Toast.LENGTH_LONG).show()
 
@@ -54,15 +54,6 @@ class Crear : AppCompatActivity() {
         }
     }
 
-    suspend fun guardarEscudo(imagen: Uri): String {
-        lateinit var urlimagenfirebase: Uri
-
-        urlimagenfirebase = st.child("Productos").child("Imagenes")
-            .putFile(imagen).await().storage.downloadUrl.await()
-
-        return urlimagenfirebase.toString()
-    }
-
     private val accesoGaleria = registerForActivityResult(ActivityResultContracts.GetContent())
     { uri: Uri? ->
         if (uri != null) {
@@ -72,9 +63,6 @@ class Crear : AppCompatActivity() {
 
     }
 
-    private fun crearProducto(producto: Producto) {
-        db.child("Productos").child(producto.nombre!!).setValue(producto)
-    }
 
     private fun limpiar() {
         bind.nombre.text = null
