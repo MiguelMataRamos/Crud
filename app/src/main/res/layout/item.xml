@@ -55,6 +55,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@id/limg"
                 android:padding="10dp"
+                android:textSize="19sp"
                 />
 
             <TextView
