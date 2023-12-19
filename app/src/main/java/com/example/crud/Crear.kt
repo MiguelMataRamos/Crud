@@ -47,9 +47,6 @@ class Crear : AppCompatActivity(), CoroutineScope {
                 var descripcion = bind.descripcion.text.toString()
                 var calidad = bind.calidad.rating.toDouble()
                 launch {
-
-                    Log.d("x", nombre)
-                    Log.d("y", urlimg.toString())
                     var urlimgfirebase = Utilidades.guardarEscudo(nombre, urlimg!!)
 
                     var nuevoproducto = Producto(nombre, descripcion, calidad, urlimgfirebase)

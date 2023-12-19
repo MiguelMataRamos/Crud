@@ -80,7 +80,9 @@
                 android:scaleY="0.6"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="SpeakableTextPresentCheck" />
+                tools:ignore="SpeakableTextPresentCheck"
+                android:focusable="false"
+                />
 
             <ImageView
                 android:id="@+id/borrar"
