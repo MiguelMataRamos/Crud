@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Crear">
+    tools:context=".Crear"
+    android:background="@color/green">
 
     <androidx.cardview.widget.CardView
         android:layout_width="200dp"
@@ -47,6 +48,7 @@
             android:hint="Nombre"
             android:gravity="center"
             android:inputType="textPersonName"
+            android:background="@color/white"
             />
 
 
@@ -64,6 +66,7 @@
         app:errorEnabled="true"
         android:hint="Descripcion"
         app:startIconDrawable="@drawable/descripcion"
+
         >
 
 
@@ -74,6 +77,7 @@
             android:inputType="textMultiLine"
             android:maxLength="150"
             android:maxHeight="110dp"
+            android:background="@color/white"
             />
 
 
