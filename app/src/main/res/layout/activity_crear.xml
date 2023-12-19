@@ -66,7 +66,6 @@
         app:errorEnabled="true"
         android:hint="Descripcion"
         app:startIconDrawable="@drawable/descripcion"
-
         >
 
 

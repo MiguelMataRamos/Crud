@@ -1,38 +1,48 @@
 package com.example.crud
 
-import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.crud.databinding.ActivityCrearBinding
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlin.coroutines.CoroutineContext
 
 class Crear : AppCompatActivity() {
-    private lateinit var db: DatabaseReference
     private lateinit var bind: ActivityCrearBinding
 
+    private lateinit var db: DatabaseReference
+    private lateinit var st: StorageReference
     private var urlimg: Uri? = null
+    private lateinit var listaproductos: MutableList<Producto>
     override fun onCreate(savedInstanceState: Bundle?) {
         bind = ActivityCrearBinding.inflate(layoutInflater)
         db = FirebaseDatabase.getInstance().reference
+        st = FirebaseStorage.getInstance().reference
+
         super.onCreate(savedInstanceState)
         setContentView(bind.root)
 
         bind.enviar.setOnClickListener {
             if (validar()) {
+
+                var urlimg = guardarEscudo(urlimg!!)
                 var nombre = bind.nombre.text.toString()
                 var descripcion = bind.descripcion.text.toString()
                 var calidad = bind.calidad.rating.toDouble()
-                var urlimg = "null"
                 var nuevoproducto = Producto(nombre, descripcion, calidad, urlimg)
 
                 crearProducto(nuevoproducto)
 
                 limpiar()
+
 
                 Toast.makeText(this, "Producto guardado con exito", Toast.LENGTH_LONG).show()
 
@@ -44,6 +54,15 @@ class Crear : AppCompatActivity() {
         }
     }
 
+    suspend fun guardarEscudo(imagen: Uri): String {
+        lateinit var urlimagenfirebase: Uri
+
+        urlimagenfirebase = st.child("Productos").child("Imagenes")
+            .putFile(imagen).await().storage.downloadUrl.await()
+
+        return urlimagenfirebase.toString()
+    }
+
     private val accesoGaleria = registerForActivityResult(ActivityResultContracts.GetContent())
     { uri: Uri? ->
         if (uri != null) {
@@ -51,14 +70,13 @@ class Crear : AppCompatActivity() {
             bind.img.setImageURI(uri)
         }
 
-
     }
 
-    private fun crearProducto(producto: Producto){
+    private fun crearProducto(producto: Producto) {
         db.child("Productos").child(producto.nombre!!).setValue(producto)
     }
 
-    private fun limpiar(){
+    private fun limpiar() {
         bind.nombre.text = null
         bind.descripcion.text = null
         bind.calidad.rating = 0.0F
