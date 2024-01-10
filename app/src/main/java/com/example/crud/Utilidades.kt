@@ -2,6 +2,7 @@ package com.example.crud
 
 import android.content.Context
 import android.net.Uri
+import android.util.Log
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.android.gms.fido.fido2.api.common.RequestOptions
@@ -16,17 +17,18 @@ import kotlinx.coroutines.tasks.await
 
 class Utilidades {
     companion object {
-        private var db = FirebaseDatabase.getInstance().reference
         private var st = FirebaseStorage.getInstance().reference
 
-        fun existeClub(clubs : List<Producto>, nombre:String):Boolean{
-            return clubs.any{ it.nombre!!.lowercase()==nombre.lowercase()}
+        fun existeProducto(productos : List<Producto>, nombre:String):Boolean{
+            return productos.any{
+                it.nombre!!.lowercase()==nombre.lowercase()
+            }
         }
 
-        fun obtenerListaClubs():MutableList<Producto>{
+        fun obtenerListaProductos(db_ref: DatabaseReference):MutableList<Producto>{
             var lista = mutableListOf<Producto>()
 
-            db.child("Productos")
+            db_ref.child("Productos")
                 .addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         snapshot.children.forEach{hijo : DataSnapshot ->
@@ -40,11 +42,12 @@ class Utilidades {
                     }
                 })
 
+            Log.d("TAM",lista.size.toString())
             return lista
         }
 
-        fun crearProducto(producto: Producto) {
-            db.child("Productos").child(producto.nombre!!).setValue(producto)
+        fun crearProducto(db_ref: DatabaseReference, id: String, producto: Producto) {
+            db_ref.child("Productos").child(id).setValue(producto)
         }
 
         suspend fun guardarEscudo(id: String, imagen: Uri): String {

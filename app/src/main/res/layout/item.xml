@@ -11,6 +11,8 @@
     app:cardCornerRadius="20dp"
     >
 
+
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,8 +29,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/limg"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -37,8 +39,8 @@
 
                 <ImageView
                     android:id="@+id/img"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     android:src="@drawable/fotodef"
@@ -63,26 +65,27 @@
                 android:layout_height="0dp"
                 android:id="@+id/descripcion"
                 android:text="Descripcion"
-                app:layout_constraintTop_toBottomOf="@id/calidad"
+                app:layout_constraintTop_toBottomOf="@id/nombre"
                 app:layout_constraintStart_toEndOf="@id/limg"
                 android:padding="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 />
 
-            <RatingBar
+            <androidx.appcompat.widget.AppCompatRatingBar
                 android:id="@+id/calidad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toEndOf="@id/nombre"
-                android:layout_marginStart="30dp"
                 android:numStars="5"
-                android:scaleX="0.6"
-                android:scaleY="0.6"
+                android:scaleX="0.5"
+                android:scaleY="0.5"
+                app:layout_constraintStart_toEndOf="@id/guideline2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="SpeakableTextPresentCheck"
                 android:focusable="false"
                 />
+
+
 
             <ImageView
                 android:id="@+id/borrar"
@@ -105,6 +108,12 @@
                 android:layout_marginEnd="10dp"
                 />
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.6111111" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

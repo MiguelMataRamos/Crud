@@ -68,8 +68,8 @@ class ProductoAdaptador(private val lista_producto: MutableList<Producto>) :
             val db = FirebaseDatabase.getInstance().reference
             val st = FirebaseStorage.getInstance().reference
             lista_filtrada.remove(item_actual)
-            st.child("Productos").child(item_actual.nombre!!).delete()
-            db.child("Productos").child(item_actual.nombre!!).removeValue()
+            st.child("Productos").child(item_actual.id!!).delete()
+            db.child("Productos").child(item_actual.id!!).removeValue()
 
             Toast.makeText(contexto, "Club borrado con exito", Toast.LENGTH_SHORT).show()
 

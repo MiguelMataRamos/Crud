@@ -33,7 +33,7 @@ class Crear : AppCompatActivity(), CoroutineScope {
         bind = ActivityCrearBinding.inflate(layoutInflater)
         db = FirebaseDatabase.getInstance().reference
         st = FirebaseStorage.getInstance().reference
-        listaproductos = Utilidades.obtenerListaClubs()
+        listaproductos = Utilidades.obtenerListaProductos(db)
 
         job = Job()
 
@@ -45,12 +45,13 @@ class Crear : AppCompatActivity(), CoroutineScope {
                 var nombre = bind.nombre.text.toString()
                 var descripcion = bind.descripcion.text.toString()
                 var calidad = bind.calidad.rating.toDouble()
+                var id_generado : String? = db.child("Productos").push().key
                 launch {
-                    var urlimgfirebase = Utilidades.guardarEscudo(nombre, urlimg!!)
+                    var urlimgfirebase = Utilidades.guardarEscudo(id_generado!!, urlimg!!)
 
-                    var nuevoproducto = Producto(nombre, descripcion, calidad, urlimgfirebase)
+                    var nuevoproducto = Producto(id_generado, nombre, descripcion, calidad, urlimgfirebase)
 
-                    Utilidades.crearProducto(nuevoproducto)
+                    Utilidades.crearProducto(db, id_generado, nuevoproducto)
 
                 }
 
@@ -104,7 +105,6 @@ class Crear : AppCompatActivity(), CoroutineScope {
     }
 
     private fun validar(): Boolean {
-        listaproductos = Utilidades.obtenerListaClubs()
         var bnombre = false
         var bdescripcion = false
         var bexiste = false
@@ -128,11 +128,12 @@ class Crear : AppCompatActivity(), CoroutineScope {
             bind.calidad.rating = 0.5F
         }
 
-        if (Utilidades.existeClub(listaproductos, bind.nombre.text.toString().trim())) {
-            Toast.makeText(applicationContext, "Ese Club ya existe", Toast.LENGTH_SHORT)
+        if (Utilidades.existeProducto(listaproductos, bind.nombre.text.toString().trim())) {
+            Toast.makeText(applicationContext, "Ese producto ya existe", Toast.LENGTH_SHORT)
                 .show()
         }else{
             bexiste = true
+
         }
 
         if (urlimg != null){

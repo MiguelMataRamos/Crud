@@ -1,6 +1,7 @@
 package com.example.crud
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -40,11 +41,10 @@ class EditarProducto : AppCompatActivity(), CoroutineScope {
         bind.nombre.setText(pojoproducto.nombre)
         bind.calidad.rating = pojoproducto.calidad!!.toFloat()
         bind.descripcion.setText(pojoproducto.descripcion)
-
-        urlimg = pojoproducto.imagen!!.toUri()
+        bind.img.setImageURI(pojoproducto.imagen!!.toUri())
 
         Glide.with(applicationContext)
-            .load(urlimg)
+            .load(pojoproducto.imagen)
             .apply(Utilidades.opcionesGlide(applicationContext))
             .transition(Utilidades.transicion)
             .into(bind.img)
@@ -55,18 +55,25 @@ class EditarProducto : AppCompatActivity(), CoroutineScope {
                 var nombre = bind.nombre.text.toString()
                 var descripcion = bind.descripcion.text.toString()
                 var calidad = bind.calidad.rating.toDouble()
+                var url_escudo_firebase : String
                 launch {
-                    var urlimgfirebase = Utilidades.guardarEscudo(nombre, urlimg!!)
+                    if (urlimg == null){
+                        url_escudo_firebase = pojoproducto.imagen!!
+                    }else{
+                        url_escudo_firebase = Utilidades.guardarEscudo(pojoproducto.id!!, urlimg!!)
+                    }
 
-                    var nuevoproducto = Producto(nombre, descripcion, calidad, urlimgfirebase)
-
-                    Utilidades.crearProducto(nuevoproducto)
+                    var nuevoproducto = Producto(pojoproducto.id, nombre, descripcion, calidad, url_escudo_firebase)
+                    Utilidades.crearProducto(db, pojoproducto.id!!, nuevoproducto)
 
                 }
 
                 limpiar()
 
-                Toast.makeText(this, "Producto guardado con exito", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Producto editado con exito", Toast.LENGTH_LONG).show()
+
+                var intent = Intent(this, Ver::class.java)
+                startActivity(intent)
 
             }
         }
@@ -114,7 +121,7 @@ class EditarProducto : AppCompatActivity(), CoroutineScope {
     }
 
     private fun validar(): Boolean {
-        listaproductos = Utilidades.obtenerListaClubs()
+        listaproductos = Utilidades.obtenerListaProductos(db)
         var bnombre = false
         var bdescripcion = false
         var bexiste = false
@@ -138,7 +145,7 @@ class EditarProducto : AppCompatActivity(), CoroutineScope {
             bind.calidad.rating = 0.5F
         }
 
-        if (Utilidades.existeClub(listaproductos, bind.nombre.text.toString().trim())) {
+        if (Utilidades.existeProducto(listaproductos, bind.nombre.text.toString().trim())) {
             Toast.makeText(applicationContext, "Ese Club ya existe", Toast.LENGTH_SHORT)
                 .show()
         }else{

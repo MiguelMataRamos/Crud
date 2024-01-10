@@ -7,6 +7,7 @@ import java.io.Serializable
 
 @Parcelize
 data class Producto(
+    var id:String? = null,
     var nombre: String? = null,
     var descripcion: String? = null,
     var calidad: Double? = null,

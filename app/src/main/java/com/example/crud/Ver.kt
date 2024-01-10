@@ -58,5 +58,10 @@ class Ver : AppCompatActivity() {
 
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        var intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
 
 }
