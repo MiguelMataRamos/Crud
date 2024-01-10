@@ -170,4 +170,12 @@ class EditarProducto : AppCompatActivity(), CoroutineScope {
     }
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.IO + job
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        var intent = Intent(this, Ver::class.java)
+        startActivity(intent)
+    }
+
+
 }

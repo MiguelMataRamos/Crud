@@ -8,12 +8,15 @@
     android:background="@drawable/fondoinicio"
     >
 
-<ImageView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layout_constraintTop_toTopOf="parent"
-    android:src="@drawable/logo"
-    />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/recetas"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/crear"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

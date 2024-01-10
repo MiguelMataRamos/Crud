@@ -155,4 +155,9 @@ class Crear : AppCompatActivity(), CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.IO + job
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        var intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
 }
