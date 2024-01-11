@@ -87,6 +87,10 @@ class Ver : AppCompatActivity() {
             bind.buscador.setText("")
         }
 
+        bind.filtro.setOnClickListener {
+            bind.desplegable.visibility = View.VISIBLE
+        }
+
         bind.buscador.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 null

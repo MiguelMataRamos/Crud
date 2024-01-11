@@ -45,10 +45,21 @@
             android:id="@+id/lupa"
             android:layout_width="30dp"
             android:layout_height="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/filtro"
             app:layout_constraintTop_toTopOf="@id/buscador"
             app:layout_constraintBottom_toBottomOf="@id/buscador"
             android:src="@drawable/lupa"
+            android:layout_marginRight="10dp"
+            />
+
+        <ImageView
+            android:id="@+id/filtro"
+            android:layout_width="30dp"
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/buscador"
+            app:layout_constraintBottom_toBottomOf="@id/buscador"
+            android:src="@drawable/filtro"
             android:layout_marginRight="20dp"
             />
 
@@ -56,7 +67,7 @@
             android:id="@+id/close"
             android:layout_width="30dp"
             android:layout_height="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/filtro"
             app:layout_constraintTop_toTopOf="@id/buscador"
             app:layout_constraintBottom_toBottomOf="@id/buscador"
             android:src="@drawable/cerrar"
@@ -71,6 +82,7 @@
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/lista_productos"
@@ -91,6 +103,106 @@
         android:layout_margin="20dp"
         android:text="Volver"
         />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/desplegable"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:background="@color/black2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header"
+        android:visibility="visible"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/desplegable2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white2"
+            android:layout_margin="2dp"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Filtar por"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:id="@+id/texto_ordenar"
+                android:layout_margin="10dp"/>
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/radioGroup"
+                app:layout_constraintTop_toBottomOf="@id/texto_ordenar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:orientation="horizontal"
+                >
+
+                <RadioButton
+                    android:id="@+id/radio_az"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="A-z"
+                    android:layout_marginEnd="20dp"/>
+
+                <RadioButton
+                    android:id="@+id/radio_za"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Z-a"
+                    android:layout_marginStart="20dp"/>
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Calidad"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/radioGroup"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:id="@+id/texto_calidad"
+                android:layout_margin="10dp"/>
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/calidad_filtro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/texto_calidad"
+                app:layout_constraintBottom_toTopOf="@+id/aplicar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                />
+
+            <Button
+                android:id="@+id/aplicar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Aplicar Cambios"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/calidad_filtro"
+                android:layout_margin="10dp"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
 
