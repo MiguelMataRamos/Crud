@@ -88,7 +88,7 @@ class EditarProducto : AppCompatActivity(), CoroutineScope {
 
 
     private fun showImagePickerDialog() {
-        val items = arrayOf("Cámara", "Galería")
+        val items = arrayOf("Galería")
 
         AlertDialog.Builder(this)
             .setTitle("Elegir una fuente de imagen")
