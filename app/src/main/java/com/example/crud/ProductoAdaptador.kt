@@ -2,6 +2,7 @@ package com.example.crud
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -92,6 +93,7 @@ class ProductoAdaptador(private val lista_producto: MutableList<Producto>) :
 
                 val filterResults = FilterResults()
                 filterResults.values = lista_filtrada
+
                 return filterResults
             }
 

@@ -12,6 +12,8 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.RadioButton
+import android.widget.RatingBar
 import android.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,6 +31,10 @@ class Ver : AppCompatActivity() {
     private lateinit var recycler: RecyclerView
     private lateinit var adaptador: ProductoAdaptador
     private lateinit var atras: Button
+    private var az : Boolean = false
+    private var za : Boolean = false
+    private var filtrocalidad : Float? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +43,9 @@ class Ver : AppCompatActivity() {
         db = FirebaseDatabase.getInstance().reference
         lista = mutableListOf()
         atras = findViewById(R.id.volver)
+        var botonaz = findViewById<RadioButton>(R.id.radio_az)
+        var botonza = findViewById<RadioButton>(R.id.radio_za)
+        var calidadfiltro = findViewById<RatingBar>(R.id.calidad_filtro)
 
         atras.setOnClickListener {
             val activity = Intent(applicationContext, MainActivity::class.java)
@@ -91,7 +100,11 @@ class Ver : AppCompatActivity() {
             bind.desplegable.visibility = View.VISIBLE
         }
 
+
         bind.aplicar.setOnClickListener {
+            az = botonaz.isChecked
+            za = botonza.isChecked
+            filtrocalidad = calidadfiltro.rating
             bind.desplegable.visibility = View.GONE
         }
 
