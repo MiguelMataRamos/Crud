@@ -50,7 +50,7 @@ class EditarProducto : AppCompatActivity(), CoroutineScope {
             .into(bind.img)
 
 
-        bind.enviar.setOnClickListener {
+        bind.editar.setOnClickListener {
             if (validar()) {
                 var nombre = bind.nombre.text.toString()
                 var descripcion = bind.descripcion.text.toString()
@@ -94,8 +94,7 @@ class EditarProducto : AppCompatActivity(), CoroutineScope {
             .setTitle("Elegir una fuente de imagen")
             .setItems(items) { _, posicion ->
                 when (posicion) {
-                    0 -> "print"
-                    1 -> accesoGaleria.launch("image/*")
+                    0 -> accesoGaleria.launch("image/*")
 
                 }
             }
@@ -125,7 +124,7 @@ class EditarProducto : AppCompatActivity(), CoroutineScope {
         var bnombre = false
         var bdescripcion = false
         var bexiste = false
-        var bimagen = false
+
 
         if (!bind.nombre.text.isNullOrBlank()) {
             bnombre = true
@@ -152,15 +151,8 @@ class EditarProducto : AppCompatActivity(), CoroutineScope {
             bexiste = true
         }
 
-        if (urlimg != null){
-            bimagen = true
-        }else{
-            Toast.makeText(applicationContext, "Debes insertar una imagen", Toast.LENGTH_SHORT)
-                .show()
-        }
 
-
-        return bnombre && bdescripcion && bexiste && bimagen
+        return bnombre && bdescripcion && bexiste
 
     }
 

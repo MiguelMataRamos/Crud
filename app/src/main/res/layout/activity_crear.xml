@@ -99,6 +99,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/calidad"
         android:text="Enviar"
+        android:background="@drawable/diseniobotones"
+        android:textColor="@color/white"
         android:id="@+id/enviar"
         android:layout_marginHorizontal="20dp"
         />

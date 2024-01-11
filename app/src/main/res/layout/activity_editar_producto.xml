@@ -88,16 +88,18 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/enviar"
+        app:layout_constraintBottom_toTopOf="@+id/editar"
         tools:ignore="SpeakableTextPresentCheck"
         app:layout_constraintTop_toBottomOf="@id/ldescripcion"/>
 
     <Button
-        android:id="@+id/enviar"
+        android:id="@+id/editar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:text="Enviar"
+        android:text="Editar"
+        android:background="@drawable/diseniobotones"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/calidad" />

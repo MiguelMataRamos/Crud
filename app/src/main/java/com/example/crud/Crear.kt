@@ -72,14 +72,13 @@ class Crear : AppCompatActivity(), CoroutineScope {
 
 
     private fun showImagePickerDialog() {
-        val items = arrayOf("Cámara", "Galería")
+        val items = arrayOf("Galería")
 
         AlertDialog.Builder(this)
             .setTitle("Elegir una fuente de imagen")
             .setItems(items) { _, posicion ->
                 when (posicion) {
-                    0 -> "print"
-                    1 -> accesoGaleria.launch("image/*")
+                    0 -> accesoGaleria.launch("image/*")
 
                 }
             }

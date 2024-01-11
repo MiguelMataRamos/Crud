@@ -27,7 +27,8 @@
         app:layout_constraintBottom_toTopOf="@+id/ver"
         android:layout_margin="30dp"
         android:textSize="@dimen/_25sp"
-        android:backgroundTint="@color/boton"
+        android:background="@drawable/diseniobotones"
+        android:textColor="@color/white"
         />
     <Button
         android:layout_width="match_parent"
@@ -39,7 +40,8 @@
         android:text="@string/ver"
         android:layout_margin="30dp"
         android:textSize="@dimen/_25sp"
-        android:backgroundTint="@color/boton"
+        android:background="@drawable/diseniobotones"
+        android:textColor="@color/white"
 
         />
 
