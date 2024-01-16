@@ -14,24 +14,30 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.coroutines.tasks.await
+import java.text.SimpleDateFormat
+import java.util.Date
 
 class Utilidades {
     companion object {
         private var st = FirebaseStorage.getInstance().reference
+        var za = false
+        var az = false
+        var calidadmayor = false
+        var calidadmenor = false
 
-        fun existeProducto(productos : List<Producto>, nombre:String):Boolean{
-            return productos.any{
-                it.nombre!!.lowercase()==nombre.lowercase()
+        fun existeProducto(productos: List<Producto>, nombre: String): Boolean {
+            return productos.any {
+                it.nombre!!.lowercase() == nombre.lowercase()
             }
         }
 
-        fun obtenerListaProductos(db_ref: DatabaseReference):MutableList<Producto>{
+        fun obtenerListaProductos(db_ref: DatabaseReference): MutableList<Producto> {
             var lista = mutableListOf<Producto>()
 
             db_ref.child("Productos")
                 .addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
-                        snapshot.children.forEach{hijo : DataSnapshot ->
+                        snapshot.children.forEach { hijo: DataSnapshot ->
                             val pojo_producto = hijo.getValue(Producto::class.java)
                             lista.add(pojo_producto!!)
                         }
@@ -42,12 +48,19 @@ class Utilidades {
                     }
                 })
 
-            Log.d("TAM",lista.size.toString())
+            Log.d("TAM", lista.size.toString())
             return lista
         }
 
         fun crearProducto(db_ref: DatabaseReference, id: String, producto: Producto) {
             db_ref.child("Productos").child(id).setValue(producto)
+        }
+
+        fun fecha(): String {
+            var hoy = Date()
+            val formato = SimpleDateFormat("dd-MM-yyy HH:mm:ss")
+
+            return formato.format(hoy)
         }
 
         suspend fun guardarEscudo(id: String, imagen: Uri): String {
@@ -60,7 +73,7 @@ class Utilidades {
         }
 
 
-        fun animacion_carga(contexto: Context): CircularProgressDrawable{
+        fun animacion_carga(contexto: Context): CircularProgressDrawable {
             val animacion = CircularProgressDrawable(contexto)
             animacion.strokeWidth = 5f
             animacion.centerRadius = 30f

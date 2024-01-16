@@ -49,7 +49,7 @@ class Crear : AppCompatActivity(), CoroutineScope {
                 launch {
                     var urlimgfirebase = Utilidades.guardarEscudo(id_generado!!, urlimg!!)
 
-                    var nuevoproducto = Producto(id_generado, nombre, descripcion, calidad, urlimgfirebase)
+                    var nuevoproducto = Producto(id_generado, nombre, descripcion, calidad, urlimgfirebase, Utilidades.fecha())
 
                     Utilidades.crearProducto(db, id_generado, nuevoproducto)
 

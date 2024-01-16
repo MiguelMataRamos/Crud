@@ -175,17 +175,31 @@
                 android:id="@+id/texto_calidad"
                 android:layout_margin="10dp"/>
 
-            <androidx.appcompat.widget.AppCompatRatingBar
-                android:id="@+id/calidad_filtro"
+            <RadioGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/texto_calidad"
-                app:layout_constraintBottom_toTopOf="@+id/aplicar"
+                android:id="@+id/radioGroup2"
+                app:layout_constraintTop_toBottomOf="@id/texto_calidad"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:scaleX="0.8"
-                android:scaleY="0.8"
-                />
+                android:orientation="horizontal"
+                >
+
+                <RadioButton
+                    android:id="@+id/radio_mayor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mas a Menos"
+                    />
+
+                <RadioButton
+                    android:id="@+id/radio_menor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Menos a Mas "
+                    />
+
+            </RadioGroup>
 
             <Button
                 android:id="@+id/aplicar"
@@ -195,7 +209,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/calidad_filtro"
+                app:layout_constraintTop_toBottomOf="@+id/radioGroup2"
                 android:layout_margin="10dp"
                 />
 

@@ -63,7 +63,7 @@ class EditarProducto : AppCompatActivity(), CoroutineScope {
                         url_escudo_firebase = Utilidades.guardarEscudo(pojoproducto.id!!, urlimg!!)
                     }
 
-                    var nuevoproducto = Producto(pojoproducto.id, nombre, descripcion, calidad, url_escudo_firebase)
+                    var nuevoproducto = Producto(pojoproducto.id, nombre, descripcion, calidad, url_escudo_firebase , Utilidades.fecha())
                     Utilidades.crearProducto(db, pojoproducto.id!!, nuevoproducto)
 
                 }

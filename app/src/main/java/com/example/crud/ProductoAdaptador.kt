@@ -95,6 +95,7 @@ class ProductoAdaptador(private val lista_producto: MutableList<Producto>) :
                 filterResults.values = lista_filtrada
 
                 return filterResults
+
             }
 
             override fun publishResults(p0: CharSequence?, p1: FilterResults?) {

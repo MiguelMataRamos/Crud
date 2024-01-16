@@ -32,7 +32,6 @@ class Ver : AppCompatActivity() {
     private lateinit var adaptador: ProductoAdaptador
     private lateinit var atras: Button
     private var az : Boolean = false
-    private var za : Boolean = false
     private var filtrocalidad : Float? = null
 
 
@@ -45,7 +44,6 @@ class Ver : AppCompatActivity() {
         atras = findViewById(R.id.volver)
         var botonaz = findViewById<RadioButton>(R.id.radio_az)
         var botonza = findViewById<RadioButton>(R.id.radio_za)
-        var calidadfiltro = findViewById<RatingBar>(R.id.calidad_filtro)
 
         atras.setOnClickListener {
             val activity = Intent(applicationContext, MainActivity::class.java)
@@ -102,10 +100,30 @@ class Ver : AppCompatActivity() {
 
 
         bind.aplicar.setOnClickListener {
-            az = botonaz.isChecked
-            za = botonza.isChecked
-            filtrocalidad = calidadfiltro.rating
+            Utilidades.az = botonaz.isChecked
+            Utilidades.za = botonza.isChecked
+            Utilidades.calidadmayor = bind.radioMayor.isChecked
+            Utilidades.calidadmenor = bind.radioMenor.isChecked
             bind.desplegable.visibility = View.GONE
+            if (Utilidades.az){
+                lista.sortBy {
+                    it.nombre
+                }
+            }else if (Utilidades.za){
+                lista.sortBy {
+                    it.nombre
+                }
+                lista.reverse()
+            }
+
+            if (Utilidades.calidadmayor){
+                lista.sortBy { it.calidad }
+                lista.reverse()
+            }else if (Utilidades.calidadmenor) {
+                lista.sortBy { it.calidad }
+            }
+
+            recycler.adapter?.notifyDataSetChanged()
         }
 
         bind.buscador.addTextChangedListener(object : TextWatcher {
