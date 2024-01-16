@@ -126,6 +126,22 @@ class Ver : AppCompatActivity() {
             recycler.adapter?.notifyDataSetChanged()
         }
 
+        bind.restart.setOnClickListener {
+            Utilidades.az = false
+            bind.radioAz.isChecked = false
+
+            Utilidades.za = false
+            bind.radioZa.isChecked = false
+
+            Utilidades.calidadmayor = false
+            bind.radioMayor.isChecked = false
+
+            Utilidades.calidadmenor = false
+            bind.radioMenor.isChecked = false
+
+            recycler.adapter?.notifyDataSetChanged()
+        }
+
         bind.buscador.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 null

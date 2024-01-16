@@ -213,6 +213,17 @@
                 android:layout_margin="10dp"
                 />
 
+            <ImageView
+                android:id="@+id/restart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/restart"
+                app:layout_constraintTop_toTopOf="@id/aplicar"
+                app:layout_constraintBottom_toBottomOf="@id/aplicar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/aplicar"
+                />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

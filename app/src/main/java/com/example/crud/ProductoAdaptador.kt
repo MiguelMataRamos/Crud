@@ -1,5 +1,6 @@
 package com.example.crud
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -66,14 +67,20 @@ class ProductoAdaptador(private val lista_producto: MutableList<Producto>) :
         }
 
         holder.eliminar.setOnClickListener {
-            val db = FirebaseDatabase.getInstance().reference
-            val st = FirebaseStorage.getInstance().reference
-            lista_filtrada.remove(item_actual)
-            st.child("Productos").child(item_actual.id!!).delete()
-            db.child("Productos").child(item_actual.id!!).removeValue()
+            var builder = AlertDialog.Builder(contexto)
+            builder.setTitle("Eliminar Producto")
+            builder.setMessage("Estas seguro que quieres eliminar el producto: " + item_actual.nombre + "?")
+            builder.setPositiveButton("Si") { _, _ ->
+                val db = FirebaseDatabase.getInstance().reference
+                val st = FirebaseStorage.getInstance().reference
+                lista_filtrada.remove(item_actual)
+                st.child("Productos").child(item_actual.id!!).delete()
+                db.child("Productos").child(item_actual.id!!).removeValue()
 
-            Toast.makeText(contexto, "Club borrado con exito", Toast.LENGTH_SHORT).show()
-
+                Toast.makeText(contexto, "Club borrado con exito", Toast.LENGTH_SHORT).show()
+            }
+            builder.setNegativeButton("NO") { _, _ -> }
+            builder.show()
 
         }
 
