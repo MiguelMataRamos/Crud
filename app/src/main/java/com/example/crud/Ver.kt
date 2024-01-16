@@ -105,6 +105,7 @@ class Ver : AppCompatActivity() {
             Utilidades.calidadmayor = bind.radioMayor.isChecked
             Utilidades.calidadmenor = bind.radioMenor.isChecked
             bind.desplegable.visibility = View.GONE
+
             if (Utilidades.az){
                 lista.sortBy {
                     it.nombre
@@ -166,6 +167,18 @@ class Ver : AppCompatActivity() {
 
     }
 
+    fun quitarFiltroCalidad(){
+        Utilidades.calidadmayor = false
+        Utilidades.calidadmenor = false
+        bind.radioMayor.isChecked = false
+        bind.radioMenor.isChecked = false
+    }
+    fun quitarFiltroNombre(){
+        Utilidades.az = false
+        Utilidades.za = false
+        bind.radioAz.isChecked = false
+        bind.radioZa.isChecked = false
+    }
     override fun onBackPressed() {
         super.onBackPressed()
         var intent = Intent(this, MainActivity::class.java)
