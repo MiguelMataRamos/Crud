@@ -16,11 +16,13 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(bind.root)
 
+        //si se presiona el boton crear se abre la actividad crear
         bind.crear.setOnClickListener {
             var intent = Intent(this, Crear::class.java)
             startActivity(intent)
         }
 
+        //sirve para abrir la actividad ver
         bind.ver.setOnClickListener {
             var intent = Intent(this, Ver::class.java)
             startActivity(intent)

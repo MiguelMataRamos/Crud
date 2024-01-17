@@ -46,12 +46,13 @@ class Ver : AppCompatActivity() {
         var botonaz = findViewById<RadioButton>(R.id.radio_az)
         var botonza = findViewById<RadioButton>(R.id.radio_za)
 
-
+        //aqui se crea el boton para volver a la pantalla principal
         atras.setOnClickListener {
             val activity = Intent(applicationContext, MainActivity::class.java)
             startActivity(activity)
         }
 
+        //este metodo se encarga de obtener los datos de la base de datos y mostrarlos en el recycler view
         db.child("Productos").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 lista.clear()
@@ -67,6 +68,8 @@ class Ver : AppCompatActivity() {
                 println(error.message)
             }
         })
+
+
 
         adaptador = ProductoAdaptador(lista)
         recycler = findViewById(R.id.lista_productos)
@@ -86,7 +89,6 @@ class Ver : AppCompatActivity() {
             bind.buscador.requestFocus()
             inputMethodManager.showSoftInput(bind.buscador, InputMethodManager.SHOW_IMPLICIT)
         }
-
 
         bind.close.setOnClickListener {
             bind.close.visibility = View.INVISIBLE
