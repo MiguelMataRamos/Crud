@@ -101,6 +101,7 @@ class Crear : AppCompatActivity(), CoroutineScope {
         bind.descripcion.text = null
         bind.calidad.rating = 0.0F
         bind.img.setImageResource(R.drawable.fotodef)
+        urlimg = null
     }
 
     private fun validar(): Boolean {

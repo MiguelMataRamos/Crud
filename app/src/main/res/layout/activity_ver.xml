@@ -41,7 +41,7 @@
 
         <ImageView
             android:id="@+id/lupa"
-            android:layout_width="30dp"
+            android:layout_width="45dp"
             android:layout_height="0dp"
             android:layout_marginRight="10dp"
             android:src="@drawable/lupa"
@@ -51,7 +51,7 @@
 
         <ImageView
             android:id="@+id/filtro"
-            android:layout_width="30dp"
+            android:layout_width="45dp"
             android:layout_height="0dp"
             android:layout_marginRight="20dp"
             android:src="@drawable/filtro"
@@ -83,12 +83,17 @@
         android:id="@+id/lista_productos"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="5dp"
         android:scrollbars="vertical"
+        android:layout_marginHorizontal="6dp"
         app:layout_constraintBottom_toTopOf="@+id/volver"
         app:layout_constraintTop_toBottomOf="@id/header"
         tools:listitem="@layout/item" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/lista_productos" />
     <Button
         android:id="@+id/volver"
         android:layout_width="match_parent"
@@ -189,6 +194,7 @@
                     android:text="Menos a Mas " />
 
             </RadioGroup>
+
 
             <Button
                 android:id="@+id/aplicar"

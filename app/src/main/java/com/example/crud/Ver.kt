@@ -81,6 +81,7 @@ class Ver : AppCompatActivity() {
             bind.lupa.visibility = View.INVISIBLE
             bind.close.visibility = View.VISIBLE
             bind.titulo.visibility = View.GONE
+            bind.filtro.visibility = View.GONE
             bind.buscador.visibility = View.VISIBLE
             bind.buscador.requestFocus()
             inputMethodManager.showSoftInput(bind.buscador, InputMethodManager.SHOW_IMPLICIT)
@@ -91,6 +92,7 @@ class Ver : AppCompatActivity() {
             bind.close.visibility = View.INVISIBLE
             bind.lupa.visibility = View.VISIBLE
             bind.titulo.visibility = View.VISIBLE
+            bind.filtro.visibility = View.VISIBLE
             bind.buscador.visibility = View.INVISIBLE
             adaptador.filter.filter("")
             inputMethodManager.hideSoftInputFromWindow(it.windowToken, 0)
