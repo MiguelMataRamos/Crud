@@ -69,7 +69,7 @@ class ProductoAdaptador(private val lista_producto: MutableList<Producto>) :
         holder.eliminar.setOnClickListener {
             var builder = AlertDialog.Builder(contexto)
             builder.setTitle("Eliminar Producto")
-            builder.setMessage("Estas seguro que quieres eliminar el producto: " + item_actual.nombre + "?")
+            builder.setMessage("Estas seguro que quieres eliminar el producto: " + item_actual.nombre!!.uppercase())
             builder.setPositiveButton("Si") { _, _ ->
                 val db = FirebaseDatabase.getInstance().reference
                 val st = FirebaseStorage.getInstance().reference

@@ -97,6 +97,7 @@
                 android:numStars="5"
                 android:scaleX="0.4"
                 android:scaleY="0.4"
+                android:isIndicator="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.4"
                 app:layout_constraintStart_toEndOf="@id/guideline2"

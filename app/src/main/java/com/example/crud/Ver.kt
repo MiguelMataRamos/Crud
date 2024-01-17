@@ -13,6 +13,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.RatingBar
 import android.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -45,6 +46,7 @@ class Ver : AppCompatActivity() {
         var botonaz = findViewById<RadioButton>(R.id.radio_az)
         var botonza = findViewById<RadioButton>(R.id.radio_za)
 
+
         atras.setOnClickListener {
             val activity = Intent(applicationContext, MainActivity::class.java)
             startActivity(activity)
@@ -55,8 +57,8 @@ class Ver : AppCompatActivity() {
                 lista.clear()
                 snapshot.children.forEach { hijo: DataSnapshot?
                     ->
-                    val pojo_producto = hijo?.getValue(Producto::class.java)
-                    lista.add(pojo_producto!!)
+                    val pojoproducto = hijo!!.getValue(Producto::class.java)
+                    lista.add(pojoproducto!!)
                 }
                 recycler.adapter?.notifyDataSetChanged()
             }
@@ -98,6 +100,20 @@ class Ver : AppCompatActivity() {
             bind.desplegable.visibility = View.VISIBLE
         }
 
+        bind.radioAz.setOnClickListener {
+            comprobarFiltroCalidad()
+        }
+        bind.radioZa.setOnClickListener {
+            comprobarFiltroCalidad()
+        }
+
+        bind.radioMayor.setOnClickListener {
+            comprobarFiltroNombre()
+        }
+        bind.radioMenor.setOnClickListener {
+            comprobarFiltroNombre()
+        }
+
 
         bind.aplicar.setOnClickListener {
             Utilidades.az = botonaz.isChecked
@@ -128,19 +144,8 @@ class Ver : AppCompatActivity() {
         }
 
         bind.restart.setOnClickListener {
-            Utilidades.az = false
-            bind.radioAz.isChecked = false
-
-            Utilidades.za = false
-            bind.radioZa.isChecked = false
-
-            Utilidades.calidadmayor = false
-            bind.radioMayor.isChecked = false
-
-            Utilidades.calidadmenor = false
-            bind.radioMenor.isChecked = false
-
-            recycler.adapter?.notifyDataSetChanged()
+            quitarFiltroCalidad()
+            quitarFiltroNombre()
         }
 
         bind.buscador.addTextChangedListener(object : TextWatcher {
@@ -167,18 +172,29 @@ class Ver : AppCompatActivity() {
 
     }
 
-    fun quitarFiltroCalidad(){
-        Utilidades.calidadmayor = false
-        Utilidades.calidadmenor = false
-        bind.radioMayor.isChecked = false
-        bind.radioMenor.isChecked = false
+
+    fun comprobarFiltroNombre(){
+        if (bind.radioAz.isChecked || bind.radioZa.isChecked){
+            quitarFiltroNombre()
+        }
+    }
+
+    fun comprobarFiltroCalidad(){
+        if (bind.radioMayor.isChecked || bind.radioMenor.isChecked){
+            quitarFiltroCalidad()
+        }
     }
     fun quitarFiltroNombre(){
         Utilidades.az = false
         Utilidades.za = false
-        bind.radioAz.isChecked = false
-        bind.radioZa.isChecked = false
+        bind.radioGroup.clearCheck()
     }
+    fun quitarFiltroCalidad(){
+        Utilidades.calidadmayor = false
+        Utilidades.calidadmenor = false
+        bind.radioGroup2.clearCheck()
+    }
+
     override fun onBackPressed() {
         super.onBackPressed()
         var intent = Intent(this, MainActivity::class.java)

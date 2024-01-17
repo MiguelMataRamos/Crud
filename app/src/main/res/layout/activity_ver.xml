@@ -4,82 +4,77 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Ver"
-    android:background="@drawable/fondoinicio">
+    android:background="@drawable/fondoinicio"
+    tools:context=".Ver">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:id="@+id/header"
-        app:layout_constraintTop_toTopOf="parent"
         android:background="@color/white2"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/titulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lista de Recetas"
-            android:textSize="25sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:padding="10dp"
+            android:text="Lista de Recetas"
             android:textColor="@color/black"
-            android:id="@+id/titulo"/>
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            android:id="@+id/buscador"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@+id/lupa"
-            android:inputType="text"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:hint="Buscar..."
-            app:layout_constraintStart_toEndOf="@+id/titulo"
-            android:id="@+id/buscador"
-            android:visibility="invisible"
             android:layout_marginLeft="20dp"
-            />
+            android:hint="Buscar..."
+            android:inputType="text"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/lupa"
+            app:layout_constraintStart_toEndOf="@+id/titulo"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/lupa"
             android:layout_width="30dp"
             android:layout_height="0dp"
-            app:layout_constraintEnd_toStartOf="@+id/filtro"
-            app:layout_constraintTop_toTopOf="@id/buscador"
-            app:layout_constraintBottom_toBottomOf="@id/buscador"
-            android:src="@drawable/lupa"
             android:layout_marginRight="10dp"
-            />
+            android:src="@drawable/lupa"
+            app:layout_constraintBottom_toBottomOf="@id/buscador"
+            app:layout_constraintEnd_toStartOf="@+id/filtro"
+            app:layout_constraintTop_toTopOf="@id/buscador" />
 
         <ImageView
             android:id="@+id/filtro"
             android:layout_width="30dp"
             android:layout_height="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/buscador"
-            app:layout_constraintBottom_toBottomOf="@id/buscador"
-            android:src="@drawable/filtro"
             android:layout_marginRight="20dp"
-            />
+            android:src="@drawable/filtro"
+            app:layout_constraintBottom_toBottomOf="@id/buscador"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/buscador" />
 
         <ImageView
             android:id="@+id/close"
             android:layout_width="30dp"
             android:layout_height="0dp"
-            app:layout_constraintEnd_toStartOf="@id/filtro"
-            app:layout_constraintTop_toTopOf="@id/buscador"
-            app:layout_constraintBottom_toBottomOf="@id/buscador"
+            android:layout_marginRight="20dp"
             android:src="@drawable/cerrar"
             android:visibility="invisible"
-            android:layout_marginRight="20dp"
-            />
+            app:layout_constraintBottom_toBottomOf="@id/buscador"
+            app:layout_constraintEnd_toStartOf="@id/filtro"
+            app:layout_constraintTop_toTopOf="@id/buscador" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="@color/black"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -88,21 +83,19 @@
         android:id="@+id/lista_productos"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:scrollbars="vertical"
-        app:layout_constraintTop_toBottomOf="@id/header"
-        app:layout_constraintBottom_toTopOf="@+id/volver"
-        tools:listitem="@layout/item"
         android:layout_margin="5dp"
-        />
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/volver"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        tools:listitem="@layout/item" />
 
     <Button
         android:id="@+id/volver"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_margin="20dp"
         android:text="Volver"
-        />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -119,85 +112,81 @@
             android:id="@+id/desplegable2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white2"
             android:layout_margin="2dp"
-            >
+            android:background="@color/white2">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Filtar por"
-                android:textColor="@color/black"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:gravity="center"
-                android:textSize="18sp"
                 android:id="@+id/texto_ordenar"
-                android:layout_margin="10dp"/>
-
-            <RadioGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/radioGroup"
-                app:layout_constraintTop_toBottomOf="@id/texto_ordenar"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:text="Filtar por"
+                android:textColor="@color/black"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                >
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/texto_ordenar">
 
                 <RadioButton
                     android:id="@+id/radio_az"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="A-z"
-                    android:layout_marginEnd="20dp"/>
+                    android:layout_marginEnd="20dp"
+                    android:text="A-z" />
 
                 <RadioButton
                     android:id="@+id/radio_za"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Z-a"
-                    android:layout_marginStart="20dp"/>
+                    android:layout_marginStart="20dp"
+                    android:text="Z-a" />
+
 
             </RadioGroup>
 
             <TextView
+                android:id="@+id/texto_calidad"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center"
                 android:text="Calidad"
                 android:textColor="@color/black"
-                app:layout_constraintTop_toBottomOf="@id/radioGroup"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:gravity="center"
                 android:textSize="18sp"
-                android:id="@+id/texto_calidad"
-                android:layout_margin="10dp"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/radioGroup" />
 
             <RadioGroup
+                android:id="@+id/radioGroup2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/radioGroup2"
-                app:layout_constraintTop_toBottomOf="@id/texto_calidad"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:orientation="horizontal"
-                >
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/texto_calidad">
 
                 <RadioButton
                     android:id="@+id/radio_mayor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mas a Menos"
-                    />
+                    android:text="Mas a Menos" />
 
                 <RadioButton
                     android:id="@+id/radio_menor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Menos a Mas "
-                    />
+                    android:text="Menos a Mas " />
 
             </RadioGroup>
 
@@ -205,30 +194,26 @@
                 android:id="@+id/aplicar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:text="Aplicar Cambios"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/radioGroup2"
-                android:layout_margin="10dp"
-                />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
 
             <ImageView
                 android:id="@+id/restart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/restart"
-                app:layout_constraintTop_toTopOf="@id/aplicar"
-                app:layout_constraintBottom_toBottomOf="@id/aplicar"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/aplicar"
-                />
+                app:layout_constraintEnd_toStartOf="@id/texto_ordenar"
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/texto_ordenar" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
