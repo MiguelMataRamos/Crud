@@ -26,14 +26,14 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 class Ver : AppCompatActivity() {
-    private lateinit var bind : ActivityVerBinding
+    private lateinit var bind: ActivityVerBinding
     private lateinit var db: DatabaseReference
     private lateinit var lista: MutableList<Producto>
     private lateinit var recycler: RecyclerView
     private lateinit var adaptador: ProductoAdaptador
     private lateinit var atras: Button
-    private var az : Boolean = false
-    private var filtrocalidad : Float? = null
+    private var az: Boolean = false
+    private var filtrocalidad: Float? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,7 +75,8 @@ class Ver : AppCompatActivity() {
         recycler.setHasFixedSize(true)
 
 
-        val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager =
+            getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         bind.lupa.setOnClickListener {
             bind.lupa.visibility = View.INVISIBLE
             bind.close.visibility = View.VISIBLE
@@ -122,21 +123,21 @@ class Ver : AppCompatActivity() {
             Utilidades.calidadmenor = bind.radioMenor.isChecked
             bind.desplegable.visibility = View.GONE
 
-            if (Utilidades.az){
+            if (Utilidades.az) {
                 lista.sortBy {
                     it.nombre
                 }
-            }else if (Utilidades.za){
+            } else if (Utilidades.za) {
                 lista.sortBy {
                     it.nombre
                 }
                 lista.reverse()
             }
 
-            if (Utilidades.calidadmayor){
+            if (Utilidades.calidadmayor) {
                 lista.sortBy { it.calidad }
                 lista.reverse()
-            }else if (Utilidades.calidadmenor) {
+            } else if (Utilidades.calidadmenor) {
                 lista.sortBy { it.calidad }
             }
 
@@ -169,27 +170,28 @@ class Ver : AppCompatActivity() {
         })
 
 
-
     }
 
 
-    fun comprobarFiltroNombre(){
-        if (bind.radioAz.isChecked || bind.radioZa.isChecked){
+    fun comprobarFiltroNombre() {
+        if (bind.radioAz.isChecked || bind.radioZa.isChecked) {
             quitarFiltroNombre()
         }
     }
 
-    fun comprobarFiltroCalidad(){
-        if (bind.radioMayor.isChecked || bind.radioMenor.isChecked){
+    fun comprobarFiltroCalidad() {
+        if (bind.radioMayor.isChecked || bind.radioMenor.isChecked) {
             quitarFiltroCalidad()
         }
     }
-    fun quitarFiltroNombre(){
+
+    fun quitarFiltroNombre() {
         Utilidades.az = false
         Utilidades.za = false
         bind.radioGroup.clearCheck()
     }
-    fun quitarFiltroCalidad(){
+
+    fun quitarFiltroCalidad() {
         Utilidades.calidadmayor = false
         Utilidades.calidadmenor = false
         bind.radioGroup2.clearCheck()

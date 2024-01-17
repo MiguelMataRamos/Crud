@@ -57,10 +57,10 @@ class Utilidades {
         }
 
         fun fecha(): String {
-            var hoy = Date()
+            var fecha = Date()
             val formato = SimpleDateFormat("dd-MM-yyy HH:mm:ss")
 
-            return formato.format(hoy)
+            return formato.format(fecha)
         }
 
         suspend fun guardarEscudo(id: String, imagen: Uri): String {
