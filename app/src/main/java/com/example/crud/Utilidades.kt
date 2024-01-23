@@ -48,7 +48,6 @@ class Utilidades {
                     }
                 })
 
-            Log.d("TAM", lista.size.toString())
             return lista
         }
 

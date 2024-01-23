@@ -6,6 +6,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -45,11 +46,22 @@ class Crear : AppCompatActivity(), CoroutineScope {
                 var nombre = bind.nombre.text.toString()
                 var descripcion = bind.descripcion.text.toString()
                 var calidad = bind.calidad.rating.toDouble()
-                var id_generado : String? = db.child("Productos").push().key
+                var id_generado: String? = db.child("Productos").push().key
+                var estado_noti = Estado.CREADO
+                var androidId = Settings.Secure.getString(contentResolver,Settings.Secure.ANDROID_ID)
                 launch {
                     var urlimgfirebase = Utilidades.guardarEscudo(id_generado!!, urlimg!!)
 
-                    var nuevoproducto = Producto(id_generado, nombre, descripcion, calidad, urlimgfirebase, Utilidades.fecha())
+                    var nuevoproducto = Producto(
+                        id_generado,
+                        nombre,
+                        descripcion,
+                        calidad,
+                        urlimgfirebase,
+                        Utilidades.fecha(),
+                        estado_noti,
+                        androidId
+                    )
 
                     Utilidades.crearProducto(db, id_generado, nuevoproducto)
 
@@ -131,14 +143,14 @@ class Crear : AppCompatActivity(), CoroutineScope {
         if (Utilidades.existeProducto(listaproductos, bind.nombre.text.toString().trim())) {
             Toast.makeText(applicationContext, "Ese producto ya existe", Toast.LENGTH_SHORT)
                 .show()
-        }else{
+        } else {
             bexiste = true
 
         }
 
-        if (urlimg != null){
+        if (urlimg != null) {
             bimagen = true
-        }else{
+        } else {
             Toast.makeText(applicationContext, "Debes insertar una imagen", Toast.LENGTH_SHORT)
                 .show()
         }
@@ -152,6 +164,7 @@ class Crear : AppCompatActivity(), CoroutineScope {
         job.cancel()
         super.onDestroy()
     }
+
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.IO + job
 

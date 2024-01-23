@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -73,7 +74,10 @@ class ProductoAdaptador(private val lista_producto: MutableList<Producto>) :
             builder.setPositiveButton("Si") { _, _ ->
                 val db = FirebaseDatabase.getInstance().reference
                 val st = FirebaseStorage.getInstance().reference
+                var androidId = Settings.Secure.getString(contexto.contentResolver,Settings.Secure.ANDROID_ID)
                 lista_filtrada.remove(item_actual)
+                //Cambiamos el user_id ya que puede ser otro usuario el que quiera eliminar el producto
+                item_actual.user_noti = androidId
                 st.child("Productos").child(item_actual.id!!).delete()
                 db.child("Productos").child(item_actual.id!!).removeValue()
 

@@ -119,7 +119,7 @@ class Ver : AppCompatActivity() {
             comprobarFiltroNombre()
         }
 
-
+        //este metodo se encarga de aplicar los filtros
         bind.aplicar.setOnClickListener {
             Utilidades.az = botonaz.isChecked
             Utilidades.za = botonza.isChecked
@@ -169,7 +169,6 @@ class Ver : AppCompatActivity() {
             override fun afterTextChanged(p0: Editable?) {
                 null
             }
-
 
         })
 

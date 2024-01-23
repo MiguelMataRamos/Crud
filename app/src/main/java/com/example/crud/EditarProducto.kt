@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -56,6 +57,8 @@ class EditarProducto : AppCompatActivity(), CoroutineScope {
                 var descripcion = bind.descripcion.text.toString()
                 var calidad = bind.calidad.rating.toDouble()
                 var url_escudo_firebase : String
+                var estado_noti = Estado.MODIFICADO
+                var androidId = Settings.Secure.getString(contentResolver,Settings.Secure.ANDROID_ID)
                 launch {
                     if (urlimg == null){
                         url_escudo_firebase = pojoproducto.imagen!!
@@ -63,7 +66,7 @@ class EditarProducto : AppCompatActivity(), CoroutineScope {
                         url_escudo_firebase = Utilidades.guardarEscudo(pojoproducto.id!!, urlimg!!)
                     }
 
-                    var nuevoproducto = Producto(pojoproducto.id, nombre, descripcion, calidad, url_escudo_firebase , Utilidades.fecha())
+                    var nuevoproducto = Producto(pojoproducto.id, nombre, descripcion, calidad, url_escudo_firebase , Utilidades.fecha(),estado_noti, androidId)
                     Utilidades.crearProducto(db, pojoproducto.id!!, nuevoproducto)
 
                 }

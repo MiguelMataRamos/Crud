@@ -12,5 +12,7 @@ data class Producto(
     var descripcion: String? = null,
     var calidad: Double? = null,
     var imagen: String? = null,
-    var fecha: String? = null
+    var fecha: String? = null,
+    var estado_noti: Int? = null,
+    var user_noti: String? = null
 ) : Parcelable
