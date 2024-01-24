@@ -59,9 +59,11 @@ class MainActivity : AppCompatActivity() {
                 override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                     val pojo_producto = snapshot.getValue(Producto::class.java)
                     if (!pojo_producto!!.user_noti.equals(androidId) && pojo_producto!!.estado_noti == Estado.CREADO) {
-                        db_ref.child("Productos").child(pojo_producto.id!!).child("estado_noti").setValue(Estado.NOTIFICADO)
-                        lanzarNotificacion(generador.incrementAndGet(), pojo_producto,
-                            "Se ha creado un nuevo producto " + pojo_producto.nombre,
+                        db_ref.child("Productos").child(pojo_producto.id!!).child("estado_noti")
+                            .setValue(Estado.NOTIFICADO)
+                        lanzarNotificacion(
+                            generador.incrementAndGet(), pojo_producto,
+                            "Se ha creado una nueva receta " + pojo_producto.nombre,
                             "Nuevos datos en la app",
                             Ver::class.java
                         )
@@ -73,8 +75,9 @@ class MainActivity : AppCompatActivity() {
                     if (!pojo_producto!!.user_noti.equals(androidId) && pojo_producto!!.estado_noti == Estado.MODIFICADO) {
                         db_ref.child("Productos").child(pojo_producto.id!!)
                             .child("estado_noti").setValue(Estado.NOTIFICADO)
-                        lanzarNotificacion(generador.incrementAndGet(), pojo_producto,
-                            "Se ha editado el club " + pojo_producto.nombre,
+                        lanzarNotificacion(
+                            generador.incrementAndGet(), pojo_producto,
+                            "Se ha editado la receta " + pojo_producto.nombre,
                             "Datos modificados en la app",
                             EditarProducto::class.java
                         )
@@ -83,13 +86,14 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onChildRemoved(snapshot: DataSnapshot) {
                     val pojo_producto = snapshot.getValue(Producto::class.java)
-                    if (!pojo_producto!!.user_noti.equals(androidId)){
-                        lanzarNotificacion(generador.incrementAndGet(), pojo_producto,
-                            "Se ha eliminado el club " + pojo_producto.nombre,
-                            "Datos eliminados en la app",
-                            Ver::class.java
-                        )
-                    }
+
+                    lanzarNotificacion(
+                        generador.incrementAndGet(), pojo_producto!!,
+                        "Se ha eliminado la receta " + pojo_producto.nombre,
+                        "Datos eliminados en la app",
+                        Ver::class.java
+                    )
+
 
                 }
 
@@ -105,7 +109,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun crearCanalNotificacion(){
+    fun crearCanalNotificacion() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val nombre = "Notificacion"
             val descripcion = "Canal de notificacion"
@@ -119,7 +123,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun lanzarNotificacion(id_noti: Int, pojo: Parcelable, contenido: String, titulo: String, destino: Class<*>){
+    fun lanzarNotificacion(
+        id_noti: Int,
+        pojo: Parcelable,
+        contenido: String,
+        titulo: String,
+        destino: Class<*>
+    ) {
         val actividad = Intent(this, destino)
         actividad.putExtra("Producto", pojo)
 
